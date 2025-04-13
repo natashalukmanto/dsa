@@ -18,14 +18,25 @@
 
 | Name | Description | Link |
 | ------ | -------- | ------ |
-| Elements of Programming Interviews in Python | Probably my most favorite book for programming interviews, problem sets are more on the intermediate to hard level, but it's more relatable to something you might see on an interview | ![Amazon](https://a.co/d/928ptwD) |
-| Linked Lists | Singly, Doubly, Reverse, Cycle Detection |
-| Stacks & Queues | Monotonic Stack, Min Stack |
-| Trees & Graphs | DFS, BFS, Topological Sort |
-| Dynamic Programming | Memoization, Tabulation |
-| Others | Bit Manipulation, Math, Recursion |
+| Elements of Programming Interviews in Python | Probably my most favorite book for programming interviews, problem sets are more on the intermediate to hard level, but it's more relatable to something you might see on an interview | [Amazon](https://a.co/d/928ptwD) |
+| NeetCode 150 Roadmap | A curated problem set categorized based on topics | [NeetCode.io](https://neetcode.io/roadmap) |
+| Grind75 | 75 most-famous LeetCode questions | [Grind75](https://www.techinterviewhandbook.org/grind75/) |
+| Fundamental DSA Theory | A playlist made by Greg Hogg of the fundamentals data structures you have to know | [YouTube](https://www.youtube.com/playlist?list=PLKYEe2WisBTGq9T0wPulXz1otUsVeOGey) |
 
 ---
+
+## ✨ My Personal Take
+
+:books: Here are some of my personal opinions as a student trying to learn DSA:
+- I think it's best to start by topics. Of course, if you have, say 5 days before your interview, go with Grind75.
+- Master one topic before going to the next one, EPI is a really good resource to accomplish this.
+- For each question, start by giving yourself 20 minutes to solve it on your own. If you can't then see the solutions and study it deeply. If you have no intuition/completely lost on the first 10 minutes, also look at the solutions.
+- Even after solving a problem, always ask analyze the time complexity & space complexity of your answer. Then read/figure out the optimized solution.
+- Have lots of mock interviews with your friends, it's really helps you pass your technicals.
+- I've asked around and software engineers who really have made it to the top said that it takes about 1 year to be really interview-ready or equivalent to ~500 LC questions that are mostly medium/hard difficulty.
+
+---
+
 
 ## 🛠 Languages & Tools
 
@@ -36,19 +47,10 @@
 
 ---
 
-## 🚀 Goals
-
-- [x] Build problem-solving intuition  
-- [x] Learn patterns, not just solutions  
-- [x] Stay consistent  
-- [ ] Master DP without crying (in progress...)  
-
----
-
 ## 🔗 Let's Connect!
 
 <p align="left">
-<a href="https://www.linkedin.com/in/natashalukmanto/" target="blank"><img align="center" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin" /></a>
+<a href="https://www.linkedin.com/in/natasha-lukmanto" target="blank"><img align="center" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin" /></a>
 </p>
 
 ---
