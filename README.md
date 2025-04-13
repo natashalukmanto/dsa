@@ -18,7 +18,7 @@
 
 | Name | Description | Link |
 | ------ | -------- | ------ |
-| Elements of Programming Interviews in Python | Probably my most favorite book for programming interviews, problem sets are more on the intermediate to hard level, but it's more relatable to something you might see on an interview | ![Amazon](https://a.co/d/928ptwD)
+| Elements of Programming Interviews in Python | Probably my most favorite book for programming interviews, problem sets are more on the intermediate to hard level, but it's more relatable to something you might see on an interview | ![Amazon](https://a.co/d/928ptwD) |
 | Linked Lists | Singly, Doubly, Reverse, Cycle Detection |
 | Stacks & Queues | Monotonic Stack, Min Stack |
 | Trees & Graphs | DFS, BFS, Topological Sort |
