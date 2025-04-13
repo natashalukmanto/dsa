@@ -1,26 +1,24 @@
 <h1 align="center">Hi there 👋, I'm Natasha!</h1>
 
 <p align="center">
-  A CS Student @ UC Berkeley documenting my journey through DSA & problem-solving!  
+  A CS Student @ UC Berkeley documenting my journey through Data Structures & Algorithms!  
 </p>
 
 ---
 
 ## ✨ About This Repo
 
-:books: This is my personal space to:
-- Practice Data Structures & Algorithms
-- Document patterns, mistakes, and improvements
-- Prepare for coding interviews
-- Track my growth (even the embarrassing first attempts!)
+:books: In this repository, you will find the exact path I took in learning DSA including:
+- The valuable resources I used
+- Documentation of my intuition, first attempts, failed attempts, and finally detailed explanation to solutions
 
 ---
 
-## 🗂️ Topics Covered So Far
+## 🗂️ Resources
 
-| Topics | Concepts |
-| ------ | -------- |
-| Arrays & Strings | Sliding Window, Two Pointers |
+| Name | Description | Link |
+| ------ | -------- | ------ |
+| Elements of Programming Interviews in Python | Probably my most favorite book for programming interviews, problem sets are more on the intermediate to hard level, but it's more relatable to something you might see on an interview | ![Amazon](https://a.co/d/928ptwD)
 | Linked Lists | Singly, Doubly, Reverse, Cycle Detection |
 | Stacks & Queues | Monotonic Stack, Min Stack |
 | Trees & Graphs | DFS, BFS, Topological Sort |
