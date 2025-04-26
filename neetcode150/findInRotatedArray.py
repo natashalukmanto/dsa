@@ -37,3 +37,41 @@ def search(nums: List[int], target: int) -> int:
             back_index = middle - 1
     
     return -1
+
+def search2(nums: List[int], target: int) -> int:
+    # First, let's find the pivot
+    left, right = 0, len(nums) - 1
+
+    while left <= right:
+        middle = left + (right - left) // 2
+        if middle > 0 and nums[middle - 1] >= nums[middle]:
+            left = middle
+        if middle < len(nums) - 1 and nums[middle + 1] < nums[middle]:
+            left = middle + 1
+        if nums[middle] > nums[-1]:
+            left = middle + 1
+        else:
+            right = middle - 1
+
+    start = left
+
+    # Next, let's narrow down our search field by figuring out
+    # which part of the array should we do Binary Search 
+    left, right = 0, len(nums) - 1
+
+    if target > nums[right]:
+        right = start - 1
+    else:
+        left = start
+
+    # Finally, let's do binary search on the area we have decided
+    while left <= right:
+        middle = left + (right - left) // 2
+        if nums[middle] == target:
+            return middle
+        elif nums[middle] > target:
+            right = middle - 1
+        else:
+            left = middle + 1
+    
+    return -1
