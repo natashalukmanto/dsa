@@ -1,4 +1,4 @@
-def lengthOfLongestSubstring(s: str) -> int:
+def lengthOfLongestSubstring(self, s: str) -> int:
     max_length = 0
     left, right = 0, 0
     set_s = set()
