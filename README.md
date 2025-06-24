@@ -8,7 +8,7 @@
 
 ## About This Repo
 
-:books: In this repository, you will find the exact path I took in learning DSA, including:
+In this repository, you will find the exact path I took in learning DSA, including:
 - The valuable resources I used
 - Documentation of my intuition, first attempts, failed attempts, and finally a detailed explanation of the solutions
 
@@ -27,7 +27,7 @@
 
 ## My Advice
 
-:books: Here are some of my personal advice coming from a student and a total beginner, trying to learn DSA:
+Here are some of my personal advice coming from a student and a total beginner, trying to learn DSA:
 - It's best to start studying according to topics. In other words, master each topic (like arrays, then strings, then binary search, etc.) before jumping onto the next one. Of course, if you have, say, 5 days before your interview, your best bet is with Grind75.
 - To continue with the approach I mentioned above, EPI is a very good resource (in the sense that you can really master a topic just by doing the chapter).
 - For each question, start by giving yourself 20 minutes to solve it on your own. If you can't, then see the solutions and study them deeply. If you have no intuition/completely lost in the first 10 minutes, also look at the solutions. It's good if you do take the time and sit with it for a while. But, it could also be too time-consuming. I think for each question, you should be wise to either choose "is it one of those times where I can actually solve it given more time" or "I'm not making progress". 
