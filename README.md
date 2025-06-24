@@ -6,7 +6,7 @@
 
 ---
 
-## ✨ About This Repo
+## About This Repo
 
 :books: In this repository, you will find the exact path I took in learning DSA, including:
 - The valuable resources I used
@@ -14,7 +14,7 @@
 
 ---
 
-## 🗂️ Resources
+## Resources
 
 | Name | Description | Link |
 | ------ | -------- | ------ |
@@ -25,7 +25,7 @@
 
 ---
 
-## ✨ My Advice
+## My Advice
 
 :books: Here are some of my personal advice coming from a student and a total beginner, trying to learn DSA:
 - It's best to start studying according to topics. In other words, master each topic (like arrays, then strings, then binary search, etc.) before jumping onto the next one. Of course, if you have, say, 5 days before your interview, your best bet is with Grind75.
@@ -38,7 +38,7 @@
 
 ---
 
-## 🛠 Languages & Tools
+## Languages & Tools
 
 ![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![VSCode](https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
@@ -47,7 +47,7 @@
 
 ---
 
-## 🔗 Want To Connect?
+## Let's Connect
 
 <p align="left">
 <a href="https://www.linkedin.com/in/natasha-lukmanto" target="blank"><img align="center" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin" /></a>
@@ -55,4 +55,4 @@
 
 ---
 
-<p align="center">⭐️ Thanks for visiting my repo!</p>
+<p align="center">Thanks for visiting my repo!</p>
