@@ -1,4 +1,4 @@
-def matrix_in_spiral_order(square_matrix):
+def matrix_in_spiral_order0(square_matrix):
     sequence = []
     if not square_matrix:
         return sequence
@@ -47,7 +47,12 @@ def matrix_in_spiral_order(square_matrix):
     
     return sequence
 
-def matrix_in_spiral_order(square_matrix):
+# This is a good approach, but imo it's a bit too complicated
+# Plus points for being able to flex your python library skills
+# Going with this approach shows you deeply understand how to exploit python functions, specifically
+# - you know how zip works
+# - you took advantage of python's unpacking operator (*)
+def matrix_in_spiral_order1(square_matrix):
     answer = []
     
     def construct_layer(layer_num):
@@ -63,5 +68,27 @@ def matrix_in_spiral_order(square_matrix):
         
     for layer_num in range((len(square_matrix) + 1) // 2):
         construct_layer(layer_num)
+    
+    return answer
+
+# I genuinely think this one is the more readable solution, and perhaps more natural. It's similar to my first approach, but much cleaner.
+def matrix_in_spiral_order(square_matrix):
+    #direction = 0    1        2        3
+    shift = ((0, 1), (1, 0), (0, -1), (-1, 0))
+    direction = x = y = 0
+    answer = []
+    
+    for _ in range(len(square_matrix) ** 2):
+        answer.append(square_matrix[x][y])
+        square_matrix[x][y] = 0 # this is how you mark visited cells 
+        new_x, new_y = x + shift[direction][0], y + shift[direction][1]
+        
+        if (new_x not in range(len(square_matrix)) or 
+            new_y not in range(len(square_matrix)) or
+            square_matrix[new_x][new_y] == 0): # at this point I didn't know that the entries in the square matrix won't be 0/won't have duplicates of 0. Hence why I made a visited set.
+            direction = (direction + 1) % 4 # clever way to change directions, the book uses bitwise operator, direction = (direction + 1) & 3, but I find the modulo operator more commmonly used and therefore easier to understand
+            # this cycles the direction from 0, 1, 2, 3 -> exactly all the indexes in shift 
+            new_x, new_y = x + shift[direction][0], y + shift[direction][1]
+        x, y = new_x, new_y
     
     return answer
