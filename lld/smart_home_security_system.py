@@ -23,7 +23,7 @@ class State:
     def __init__(self, state: str):
         self.state = state
     
-    def __eq__(self, other):
+    def __eq__(self, other: object):
         return self.state == other.state
     
     def __hash__(self):
