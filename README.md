@@ -22,6 +22,7 @@ In this repository, you will find the exact path I took in learning DSA, includi
 | NeetCode 150 Roadmap | A curated problem set categorized based on topics | [NeetCode.io](https://neetcode.io/roadmap) |
 | Grind75 | 75 most-famous LeetCode questions | [Grind75](https://www.techinterviewhandbook.org/grind75/) |
 | Fundamental DSA Theory | A playlist made by Greg Hogg of the fundamentals data structures you have to know | [YouTube](https://www.youtube.com/playlist?list=PLKYEe2WisBTGq9T0wPulXz1otUsVeOGey) |
+|Low Level Design | A repository made by Ashish Pratap Singh has great resources on LLD | [GitHub](https://github.com/ashishps1/awesome-low-level-design) |
 
 ---
 
