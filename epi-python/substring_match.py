@@ -2,6 +2,7 @@ import functools
 
 def rabin_karp(t: str, s: str) -> int:
     # t = text, s = substring
+    # return -1 if s not in t else t.index(s) is faster though
     if len(s) > len(t): return -1
     
     t_hash = functools.reduce(lambda hash, char: hash * 26 + ord(char), t[:len(s)], 0)
