@@ -28,37 +28,32 @@ def calcEquation0(
 
     return res
 
-
-def calcEquation(
-    equations: List[List[str]], values: List[float], queries: List[List[str]]
-) -> List[float]:
+def calcEquation(equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
     connections = defaultdict(defaultdict)
     res = []
 
     for equation, value in zip(equations, values):
         connections[equation[0]][equation[1]] = value
-        connections[equation[1]][equation[0]] = 1 / value
+        connections[equation[1]][equation[0]] = 1/value
 
-    def backtrack(source_node, target_node, value, visited):
+    def backtrack(source_node, target_node, acc_score, visited):
         visited.add(source_node)
+        ret = -1.0
         neighbors = connections[source_node]
 
         if target_node in neighbors:
-            visited.remove(source_node)
-            return value * neighbors[target_node]
-
-        for neighbor, w in neighbors.items():
-            if neighbor in visited:
-                continue
-            ret = backtrack(neighbor, target_node, value * w, visited)
-            if ret != -1.0:
-                visited.remove(source_node)
-                return ret
-
+            ret = acc_score * connections[source_node][target_node]
+        else:
+            for neighbor, value in neighbors.items():
+                if neighbor in visited:
+                    continue
+                ret = backtrack(neighbor, target_node, acc_score * value, visited)
+                if ret != -1.0:
+                    break
+                    
         visited.remove(source_node)
-        return -1.0
+        return ret
 
-    ret = -1.0
     for dividend, divisor in queries:
         if dividend not in connections or divisor not in connections:
             ret = -1.0
