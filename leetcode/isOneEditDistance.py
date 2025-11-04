@@ -16,7 +16,7 @@ def isOneEditDistance(self, s: str, t: str) -> bool:
         
     return s != t
 
-def isOneEditDistance(s: str, t: str) -> bool:
+def isOneEditDistance0(s: str, t: str) -> bool:
     if s == t or abs(len(s) - len(t)) > 1: return False
     
     pointer_s, pointer_t, tolerance = 0, 0, 1
