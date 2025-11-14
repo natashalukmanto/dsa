@@ -17,7 +17,6 @@ def sort_approximately_sorted_array0(sequence: Iterator[int], k: int) -> List[in
 
     return res
 
-
 def sort_approximately_sorted_array0(sequence: Iterator[int], k: int) -> List[int]:
     res, min_heap = [], []
 
