@@ -2,7 +2,28 @@ from typing import List
 
 
 def intervalIntersection(
-    self, firstList: List[List[int]], secondList: List[List[int]]
+    firstList: List[List[int]], secondList: List[List[int]]
+) -> List[List[int]]:
+    res = []
+
+    f, s = 0, 0
+    while f < len(firstList) and s < len(secondList):
+        start = max(firstList[f][0], secondList[s][0])
+        end = min(firstList[f][1], secondList[s][1])
+
+        if start <= end:
+            res.append([start, end])
+
+        if firstList[f][1] < secondList[s][1]:
+            f += 1
+        else:
+            s += 1
+
+    return res
+
+
+def intervalIntersection(
+    firstList: List[List[int]], secondList: List[List[int]]
 ) -> List[List[int]]:
     if not firstList or not secondList:
         return []
