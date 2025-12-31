@@ -1,6 +1,6 @@
 from typing import List
 
-
+# Sliding Window
 def maxFreeTime(
     eventTime: int, k: int, startTime: List[int], endTime: List[int]
 ) -> int:
