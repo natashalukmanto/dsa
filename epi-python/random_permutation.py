@@ -27,3 +27,13 @@ def compute_random_permutation(n: int) -> List[int]:
     permutation = list(range(n))
     random_sampling(n, permutation)
     return permutation
+
+
+def compute_random_permutation(n: int) -> List[int]:
+    res = list(range(n))
+    
+    for i in range(n):
+        r = random.randint(i, n-1)
+        res[i], res[r] = res[r], res[i]
+    
+    return res
