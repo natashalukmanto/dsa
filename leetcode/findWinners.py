@@ -41,3 +41,23 @@ def findWinners(matches: List[List[int]]) -> List[List[int]]:
             answer[1].append(i)
 
     return answer
+
+
+def findWinners(matches: List[List[int]]) -> List[List[int]]:
+    winners, losers, multi_losers = set(), set(), set()
+
+    for winner, loser in matches:
+        winners.add(winner)
+
+        if loser in losers:
+            multi_losers.add(loser)
+        else:
+            losers.add(loser)
+
+    winners = list(winners - losers)
+    losers = list(losers - multi_losers)
+
+    winners.sort()
+    losers.sort()
+
+    return [winners, losers]
