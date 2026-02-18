@@ -26,3 +26,17 @@ def lengthOfLongestSubstring(s: str) -> int:
         max_len = max(max_len, right - left + 1)
 
     return max_len
+
+
+def lengthOfLongestSubstring(s: str) -> int:
+    dic = {}
+    left = max_len = 0
+
+    for right in range(len(s)):
+        if s[right] in dic:
+            left = max(left, dic[s[right]])
+
+        max_len = max(max_len, right - left + 1)
+        dic[s[right]] = right + 1
+
+    return max_len
