@@ -44,3 +44,20 @@ def maximumUniqueSubarray(self, nums: List[int]) -> int:
         max_sum = max(max_sum, curr_sum)
 
     return max_sum
+
+
+def maximumUniqueSubarray(nums: List[int]) -> int:
+    left = max_sum = curr_sum = 0
+    unique = set()
+
+    for right in range(len(nums)):
+        while nums[right] in unique:
+            unique.remove(nums[left])
+            curr_sum -= nums[left]
+            left += 1
+
+        unique.add(nums[right])
+        curr_sum += nums[right]
+        max_sum = max(max_sum, curr_sum)
+
+    return max_sum
