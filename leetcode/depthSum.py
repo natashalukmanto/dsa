@@ -1,4 +1,5 @@
 from typing import List
+from collections import deque
 
 
 # """
@@ -44,18 +45,32 @@ class NestedInteger:
         :rtype List[NestedInteger]
         """
 
+# DFS
+def depthSum(self, nestedList: List[NestedInteger]) -> int:
+    def unpackList(nestedList: List[NestedInteger], curr_sum: int, depth: int) -> int:
+        for item in nestedList:
+            if item.isInteger():
+                curr_sum += depth * item.getInteger()
+            else:
+                curr_sum += unpackList(item.getList(), 0, depth + 1)
+        return curr_sum
 
-class Solution:
-    def depthSum(self, nestedList: List[NestedInteger]) -> int:
-        def unpackList(
-            nestedList: List[NestedInteger], curr_sum: int, depth: int
-        ) -> int:
-            for item in nestedList:
-                if item.isInteger():
-                    curr_sum += depth * item.getInteger()
-                else:
-                    curr_sum += unpackList(item.getList(), 0, depth + 1)
-            return curr_sum
+    res = unpackList(nestedList, 0, 1)
+    return res
 
-        res = unpackList(nestedList, 0, 1)
-        return res
+# BFS
+def depthSum(self, nestedList: List[NestedInteger]) -> int:
+    queue = deque(nestedList)
+
+    depth, res = 1, 0
+
+    while len(queue) > 0:
+        for _ in range(len(queue)):
+            item = queue.pop()
+            if item.isInteger():
+                res += item.getInteger() * depth
+            else:
+                queue.extendleft(item.getList())
+        depth += 1
+
+    return res
