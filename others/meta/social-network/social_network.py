@@ -52,7 +52,16 @@ class SocialNetwork:
         Example (see build_sample_network in tests.py for the topology):
             get_mutual_friends("alice", "charlie") == {"bob"}
         """
-        raise NotImplementedError
+        res = set()
+        
+        user_id_a_neighbors = self.graph.get_neighbors(user_id_a)
+        user_id_b_neighbors = self.graph.get_neighbors(user_id_b)
+        
+        for neighbor in user_id_a_neighbors:
+            if neighbor in user_id_b_neighbors: 
+                res.add(neighbor)
+        
+        return res
 
     # ------------------------------------------------------------------ #
     # Part 2                                                              #
@@ -75,8 +84,17 @@ class SocialNetwork:
             suggest_friends("alice")  →  ["charlie", "eve"]
                 # both share 1 mutual friend (bob); charlie < eve alphabetically
         """
-        raise NotImplementedError
-
+        direct_friends = self.graph.get_neighbors(user_id)
+        mutual_count: Dict[str, int] = {}
+        
+        for friend_id in direct_friends:
+            for fof in self.graph.get_neighbors(friend_id):
+                if fof != user_id and fof not in direct_friends:
+                    mutual_count[fof] = mutual_count.get(fof, 0) + 1
+        
+        # Sorting
+        return sorted(mutual_count, key=lambda uid: (-mutual_count[uid], uid))[:limit]
+          
     # ------------------------------------------------------------------ #
     # Part 3                                                              #
     # ------------------------------------------------------------------ #
@@ -92,8 +110,23 @@ class SocialNetwork:
         Example:
             shortest_path("alice", "frank")  →  ["alice", "bob", "eve", "frank"]
         """
-        raise NotImplementedError
-
+        if start_id == end_id:
+            return [start_id]
+        
+        queue = deque([[start_id]])
+        visited = set()
+        
+        while queue:
+            path = queue.popleft() # queue = [[alice, charlie], [...], [alice, bob, eve]]
+            for neighbor in self.graph.get_neighbors(path[-1]):
+                if neighbor == end_id:
+                    return path + [neighbor]
+                if neighbor not in visited:
+                    queue.append(path + [neighbor])
+                    visited.add(neighbor)
+        
+        return None
+          
     # ------------------------------------------------------------------ #
     # Part 4                                                              #
     # ------------------------------------------------------------------ #
@@ -109,4 +142,4 @@ class SocialNetwork:
             find_influencers(3)  →  ["bob", "charlie", "eve"]
                 # charlie and eve both have 2 friends; charlie < eve
         """
-        raise NotImplementedError
+        return sorted(self.graph.all_user_ids(), key=lambda uid: (-len(self.graph.get_neighbors(uid)), uid))[:k]
