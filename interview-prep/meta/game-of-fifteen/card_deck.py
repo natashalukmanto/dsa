@@ -24,9 +24,7 @@ class CardDeck:
         """
         if not self.has_more():
             return None
-        top_card = self._card_sequence[0]
-        self._card_sequence = self._card_sequence[1:]
-        return top_card
+        return self._card_sequence.pop(0)
 
     def remaining(self) -> List[int]:
         return [card for card in self._card_sequence]
