@@ -1,5 +1,6 @@
 from enum import Enum
 from dictionary import Dictionary
+from collections import Counter
 
 
 class Match(Enum):
@@ -22,16 +23,17 @@ class Puzzle:
     def _check_guess(self, guess):
         guess_chars = list(guess)
         result = [Match.NO] * len(self.answer)
+        freq = Counter(self.answer)
 
         for idx in range(len(self.answer)):
-            result[idx] = Match.NO
             if guess_chars[idx] == self.answer[idx]:
                 result[idx] = Match.YES
-            else:
-                for others in range(len(self.answer)):
-                    if guess_chars[idx] == self.answer[others]:
-                        result[idx] = Match.MOVE
-                        break
+                freq[guess_chars[idx]] -= 1
+            
+        for idx in range(len(self.answer)):
+            if result[idx] != Match.YES and freq.get(guess_chars[idx], 0) > 0:
+                result[idx] = Match.MOVE
+                freq[guess_chars[idx]] -= 1
 
         return result
 
