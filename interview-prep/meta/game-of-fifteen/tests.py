@@ -155,6 +155,22 @@ class TestSolver(unittest.TestCase):
 
         moves = game.solve_to_end()
         self.assertEqual(1, moves)
+        
+    def test_solve_to_end_multiple_moves(self) -> None:
+        # Construct a deck so that the grid has at least one valid move.
+        deck_values = [4, 5, 6, 9, 1, 5, 3, 6, 6]
+        game = Sum15Game(rows=3, cols=3, deck_values=deck_values)
+
+        moves = game.solve_to_end()
+        self.assertEqual(moves, 3)
+        
+    def test_solve_to_end_not_enough_cards(self) -> None:
+        # Construct a deck so that the grid has at least one valid move.
+        deck_values = [4, 5, 6, 9]
+        game = Sum15Game(rows=3, cols=3, deck_values=deck_values)
+
+        moves = game.solve_to_end()
+        self.assertEqual(moves, 1)
 
     def test_solve_to_end_returns_zero_when_no_moves(self) -> None:
         deck_values = [10, 10, 10, 11, 11, 11]

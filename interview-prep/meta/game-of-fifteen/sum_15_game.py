@@ -70,15 +70,35 @@ class Sum15Game:
 
     def find_any_valid_move(self) -> Optional[List[Tuple[int, int]]]:
         """Search for any valid three-card combination summing to the target."""
-        all_positions: List[Tuple[int, int]] = list(self.card_table.positions_row_major())
-        n = len(all_positions)
-        for i in range(n):
-            for j in range(i + 1, n):
-                for k in range(j + 1, n):
-                    triple = [all_positions[i], all_positions[j], all_positions[k]]
-                    if self.is_valid_move(triple):
-                        return triple
-
+        valid_cells = []
+        for position in self.card_table.positions_row_major():
+            card_value = self.card_table.get(position)
+            if card_value is not None:
+                valid_cells.append((position, card_value))
+        
+        if len(valid_cells) < 3:
+            return None
+        
+        for first_idx in range(len(valid_cells)):
+            first_position, first_value = valid_cells[first_idx]
+            value_to_index_map: dict[int, int] = {}
+            
+            for second_idx in range(first_idx + 1, len(valid_cells)):
+                second_position, second_value = valid_cells[second_idx]
+                
+                third_idx = value_to_index_map.get(self.TARGET_SUM - first_value - second_value)
+                
+                if third_idx is not None:
+                    third_position, _ = valid_cells[third_idx]
+                    candidate_triple = [first_position, second_position, third_position]
+                    if self.is_valid_move(candidate_triple):
+                        return candidate_triple
+                
+                value_to_index_map[second_value] = second_idx
+        
+        return None
+        
+        
     def solve_to_end(self) -> int:
         """Automatically play moves until the game reaches a terminal state.
 
