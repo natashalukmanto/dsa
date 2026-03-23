@@ -41,8 +41,21 @@ class FileSystem:
             get_node("/home/alice/resume.pdf") →  <FSNode name="resume.pdf" size=1024>
             get_node("/home/nonexistent")      →  None
         """
-        raise NotImplementedError
+        if not path or path == "/":
+            return self._root
 
+        parts = [p for p in path.strip("/").split("/") if p]
+
+        node = self._root
+        for part in parts:
+            if not node.is_dir:
+                return None
+            child = node.children.get(part)
+            if child is None:
+                return None
+            node = child
+
+        return node
     # ------------------------------------------------------------------ #
     # Part 2                                                              #
     # ------------------------------------------------------------------ #
@@ -56,7 +69,11 @@ class FileSystem:
             list_directory("/home")        →  ["alice", "bob"]
             list_directory("/home/alice")  →  ["notes.txt", "resume.pdf"]
         """
-        raise NotImplementedError
+        node = self.get_node(path)
+        if node is None or not node.is_dir:
+            raise ValueError("Path does not exist or is a file")
+        
+        return sorted(node.children.keys())
 
     # ------------------------------------------------------------------ #
     # Part 3                                                              #
@@ -74,8 +91,17 @@ class FileSystem:
             total_size("/home/alice")  →  1280   # 1024 + 256
             total_size("/home")        →  5504   # 1024 + 256 + 4096 + 128
         """
-        raise NotImplementedError
-
+        node = self.get_node(path)
+        
+        if node is None: raise ValueError("Path does not exist")
+        
+        def _size(n: FSNode) -> int:
+            if not n.is_dir:
+                return n.size
+            else:
+                return sum(_size(child) for child in n.children.values())
+        
+        return _size(node)
     # ------------------------------------------------------------------ #
     # Part 4                                                              #
     # ------------------------------------------------------------------ #
@@ -91,7 +117,18 @@ class FileSystem:
             search("config")      →  ["/etc/config"]   # directory match
             search("missing")     →  []
         """
-        raise NotImplementedError
+        results: List[str] = []
+
+        def dfs(node: FSNode, current_path: str) -> None:
+            for child_name, child in sorted(node.children.items()):
+                child_path = current_path + "/" + child_name
+                if child_name == name:
+                    results.append(child_path)
+                if child.is_dir:
+                    dfs(child, child_path)
+
+        dfs(self._root, "")
+        return results
 
     # ------------------------------------------------------------------ #
     # Part 5                                                              #
@@ -110,4 +147,15 @@ class FileSystem:
                 ("/home/alice/resume.pdf", 1024),
             ]
         """
-        raise NotImplementedError
+        all_files: List[Tuple[str, int]] = []
+
+        def dfs(node: FSNode, current_path: str) -> None:
+            for child_name, child in node.children.items():
+                child_path = current_path + "/" + child_name
+                if child.is_dir:
+                    dfs(child, child_path)
+                else:
+                    all_files.append((child_path, child.size))
+
+        dfs(self._root, "")
+        return sorted(all_files, key=lambda x: (-x[1], x[0]))[:k]
