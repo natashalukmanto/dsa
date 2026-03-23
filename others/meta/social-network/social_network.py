@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections import deque
+from collections import deque, defaultdict
 from typing import Dict, List, Optional, Set
 
 from friend_graph import FriendGraph
@@ -52,16 +52,10 @@ class SocialNetwork:
         Example (see build_sample_network in tests.py for the topology):
             get_mutual_friends("alice", "charlie") == {"bob"}
         """
-        res = set()
+        direct_friends_a = self.graph.get_neighbors(user_id_a)
+        direct_friends_b = self.graph.get_neighbors(user_id_b)
         
-        user_id_a_neighbors = self.graph.get_neighbors(user_id_a)
-        user_id_b_neighbors = self.graph.get_neighbors(user_id_b)
-        
-        for neighbor in user_id_a_neighbors:
-            if neighbor in user_id_b_neighbors: 
-                res.add(neighbor)
-        
-        return res
+        return direct_friends_a.intersection(direct_friends_b)
 
     # ------------------------------------------------------------------ #
     # Part 2                                                              #
@@ -85,16 +79,16 @@ class SocialNetwork:
                 # both share 1 mutual friend (bob); charlie < eve alphabetically
         """
         direct_friends = self.graph.get_neighbors(user_id)
-        mutual_count: Dict[str, int] = {}
+        mutuals_count: Dict[str, int] = defaultdict(int)
         
-        for friend_id in direct_friends:
-            for fof in self.graph.get_neighbors(friend_id):
-                if fof != user_id and fof not in direct_friends:
-                    mutual_count[fof] = mutual_count.get(fof, 0) + 1
+        for friend in direct_friends:
+            for fof in self.graph.get_neighbors(friend):
+                if fof != user_id:
+                    mutuals_count[fof] += 1
         
-        # Sorting
-        return sorted(mutual_count, key=lambda uid: (-mutual_count[uid], uid))[:limit]
-          
+        return sorted(mutuals_count, key=lambda uid: (-mutuals_count[uid], uid))[:limit]
+                
+         
     # ------------------------------------------------------------------ #
     # Part 3                                                              #
     # ------------------------------------------------------------------ #
@@ -110,23 +104,23 @@ class SocialNetwork:
         Example:
             shortest_path("alice", "frank")  →  ["alice", "bob", "eve", "frank"]
         """
-        if start_id == end_id:
-            return [start_id]
+        if start_id == end_id: return [start_id]
         
-        queue = deque([[start_id]])
+        queue = deque([[start_id]]) # [, [alice, charlie], [alice, bob, eve], [alice, bob, duckie]]
         visited = set()
         
-        while queue:
-            path = queue.popleft() # queue = [[alice, charlie], [...], [alice, bob, eve]]
-            for neighbor in self.graph.get_neighbors(path[-1]):
+        while queue: 
+            path = queue.popleft()
+            neighbors = self.graph.get_neighbors(path[-1])
+            for neighbor in neighbors:
                 if neighbor == end_id:
-                    return path + [neighbor]
+                    return path + [end_id]
                 if neighbor not in visited:
-                    queue.append(path + [neighbor])
                     visited.add(neighbor)
+                    queue.append(path + [neighbor])
         
         return None
-          
+            
     # ------------------------------------------------------------------ #
     # Part 4                                                              #
     # ------------------------------------------------------------------ #
@@ -134,7 +128,7 @@ class SocialNetwork:
     def find_influencers(self, k: int) -> List[str]:
         """Return the top-k users ranked by number of direct friends (degree).
 
-        Ties are broken by user_id ascending (lexicographic).
+        Ties are broken by user_id ascending (lexicographic). a > b
         If k exceeds the number of users, return all users.
 
         Example:
@@ -142,4 +136,9 @@ class SocialNetwork:
             find_influencers(3)  →  ["bob", "charlie", "eve"]
                 # charlie and eve both have 2 friends; charlie < eve
         """
-        return sorted(self.graph.all_user_ids(), key=lambda uid: (-len(self.graph.get_neighbors(uid)), uid))[:k]
+        friends_count: Dict[str, int] = defaultdict(int)
+        for user_id in self.graph.all_user_ids(): 
+            friends_count[user_id] = len(self.graph.get_neighbors(user_id))
+        #print("dictionary: ", friends_count)
+        
+        return sorted(friends_count, key=lambda user_uid: (-friends_count[user_uid], user_uid))[:k]
